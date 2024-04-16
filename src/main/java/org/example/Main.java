@@ -2,6 +2,7 @@ package org.example;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Scanner;
 
 public class Main {
     public static void main(String[] args) {
@@ -14,6 +15,19 @@ public class Main {
 
         for (String key : userMap.keySet()) {
             System.out.println(key + "さんは" + userMap.get(key));
+        }
+        Scanner scanner = new Scanner(System.in);
+        System.out.println("ユーザー名を入力して下さい:");
+        String name = scanner.nextLine();
+
+        try {
+            if (userMap.containsKey(name)) {
+                System.out.println(name + "さんは" + userMap.get(name));
+            } else {
+                throw new UserNotFoundException("ユーザーが見つかりません");
+            }
+        } catch (UserNotFoundException e) {
+            System.out.println("このユーザーは見つかりません。もう一度名前を入力してください。");
         }
     }
 }
